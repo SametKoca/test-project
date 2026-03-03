@@ -52,7 +52,7 @@ Her ihlal için şu formatı kullan:
 """
 
     message = client.messages.create (
-        model="claude-opus-4-6",
+        model="claude-sonnet-4-6",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -61,7 +61,8 @@ Her ihlal için şu formatı kullan:
 
 
 def main ():
-    gh = Github (os.environ["GITHUB_TOKEN"])
+    from github import Auth
+    gh = Github (auth=Auth.Token (os.environ["GITHUB_TOKEN"]))
     repo = gh.get_repo (os.environ["REPO_NAME"])
     pr = repo.get_pull (int (os.environ["PR_NUMBER"]))
 
